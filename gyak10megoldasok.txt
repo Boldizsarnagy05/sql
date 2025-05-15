@@ -1,0 +1,25 @@
+3,
+SET ev 2021 ex 10
+SET honap 4 ex 10
+SET nap 26 ex 10
+
+4,
+HSET  auto rendszam xxx-111 tipus "Skoda Fabia" evjarat 2021 ertek 1500000
+HGETALL auto
+
+5,
+RPUSH tantargyak "prog alapok" matematika adatbazis
+RPUSH "operacios rendszerek"
+LRANGE tantargyak 0 3
+
+6,
+SADD numbers1 40 45 60 87 100
+SADD numbers2 15 30 45 60
+SINTER numbers1 numbers2
+
+7,
+ZADD szemelyek 15 andras 20 peter 18 juli
+ZCOUNT szemelyek 16 18
+
+8, 
+scan 0 match *a* count 200
