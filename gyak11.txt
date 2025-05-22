@@ -1,0 +1,46 @@
+1, 
+show version;
+
+2,
+select count(*) from movies_and_tv;
+
+3,
+SELECT title FROM movies_and_tv WHERE release_year = 2018 and type = 'Movie' limit 3;
+
+OR feltétel nem működik!!!!
+
+desc movies_and_tv; -> oszlopok nevei
+elején use (namespace); (ugye gyak11_11)
+
+4,
+SELECT type, release_year, count(*) FROM movies_and_tv group by type, release_year LIMIT 10;
+
+--> ezek alapján voltak az elején a partition-ök.
+
+5,
+CREATE TABLE Szemely (
+nev string,
+szulev int,
+foglalkozas string
+PRIMARY KEY (((nev, szulev), foglalkozas)
+)
+-- (partition key), clustered key
+
+6,
+CREATE INDEX i_foglalkozas ON Szemely(foglalkozas);
+-- ha nincs index akkor nem lehet szűrni a táblát foglalkozás szerint
+
+7,
+SELECT nev FROM Szemely WHERE foglalkozas IN ('pincér', 'lakatos');
+
+8,
+ALTER TABLE Szemely add vegzettseg LIST<TEXT>;
+-- új oszlop
+
+9,
+Update Szemely
+set vegzettseg = vegzettseg + ['gepesz', 'muszeres']
+WHERE nev = 'Kiss Béla' and foglalkozas = 'lakatos' and szulev = 2000; -- minden oszlopra rá kell szűrni
+
+10,
+UPDATE Szemely set nyelvtudas = nyelvtudas + {'angol', 'francia'} WHERE nev = 'Nagy Ivó' and foglalkozas = 'diak' and szulev = 19999;
